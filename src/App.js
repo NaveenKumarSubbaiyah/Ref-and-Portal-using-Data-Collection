@@ -5,9 +5,11 @@ import UsersList from './components/Users/UsersList';
 
 function App() {
   const [usersList, setUsersList] = useState([]);
+  const [userListEnable, setUserListEnable] = useState(false);
 
   const addUserHandler = (uName, uAge) => {
     setUsersList((prevUsersList) => {
+      setUserListEnable(true);
       return [
         ...prevUsersList,
         { name: uName, age: uAge, id: Math.random().toString() },
@@ -18,7 +20,7 @@ function App() {
   return (
     <Fragment>
       <AddUser onAddUser={addUserHandler} />
-      <UsersList users={usersList} />
+      {userListEnable && <UsersList users={usersList} />}
     </Fragment>
   );
 }
